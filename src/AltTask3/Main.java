@@ -64,6 +64,7 @@ public class Main
 
         FindAllWays(arr, new Position(startPos.getX(), startPos.getY()), isEmpty, isFinish, new ArrayList<>(), paths);
 
+        if (paths.size() == 0) return new ArrayList<>();
         return paths.stream().min(Comparator.comparing(ArrayList::size)).get();
     }
 
