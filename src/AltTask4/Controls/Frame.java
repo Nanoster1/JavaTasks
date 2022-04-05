@@ -34,15 +34,15 @@ public class Frame extends Border
     public int getMinHeight()
     {
         var min = super.getMinHeight();
-        return super.getMinHeight() + 2;
+        return super.getMinHeight();
     }
 
     @Override
     public void RenderChild(OutService out)
     {
         if (getChild() == null) return;
-        var childPos = new Position(position.getX() + getThickness() + 1, position.getY() + getThickness() + 1);
-        getChild().Render(childPos, getWidth() - 2 * getThickness() - 2, getHeight() - 2 * getThickness() - 2, out);
+        var childPos = new Position(position.getX() + getThickness() + 1, position.getY() + getThickness());
+        getChild().Render(childPos, getWidth() - 2 * getThickness() - 2, getHeight() - 2 * getThickness(), out);
     }
 
     public String getHeader()

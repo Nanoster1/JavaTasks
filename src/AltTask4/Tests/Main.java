@@ -42,8 +42,8 @@ public class Main
                                         Orientation.Horizontal,
                                         Border.GetClassicBorder(new Text("Ok")),
                                         Border.GetClassicBorder(new Text("Cancel"))
-                                        )
-                                ),
+                                )
+                        ),
                         new Frame(
                                 "Help",
                                 new Panel(

@@ -19,14 +19,10 @@ public class HorizontalLayout extends Layout
     @Override
     public int GetMinWidth()
     {
-        var maxChild = container.children.stream().max(Comparator.comparing(Control::getMinWidth));
-        var childWidth = 0;
-        if (maxChild.isPresent()) childWidth = maxChild.get().getMinWidth();
-
         var result = 0;
-        for (var ignored : container.children)
+        for (var child : container.children)
         {
-            result += childWidth + Spacing;
+            result += child.getMinWidth() + Spacing;
         }
         return result;
     }
@@ -44,19 +40,19 @@ public class HorizontalLayout extends Layout
     public void RenderChildren(OutService out)
     {
         var maxChild = container.children.stream().max(Comparator.comparing(Control::getMinWidth));
-        var childWidth = 0;
         var childHeight = 0;
-        if (maxChild.isPresent()) childWidth = maxChild.get().getMinWidth();
         maxChild = container.children.stream().max(Comparator.comparing(Control::getMinHeight));
         if (maxChild.isPresent()) childHeight = maxChild.get().getMinHeight();
 
+        var currentSize = 0;
         for (var i = 0; i < container.children.size(); i++)
         {
             var child = container.children.get(i);
-            var x = container.position.getX() + i * (childWidth + Spacing);
+            var x = container.position.getX() + currentSize;
+            currentSize += child.getMinWidth() + Spacing;
             var y = container.position.getY();
             var positionForChildren = new Position(x, y);
-            child.Render(positionForChildren, childWidth, childHeight, out);
+            child.Render(positionForChildren, child.getMinWidth(), childHeight, out);
         }
     }
 }
