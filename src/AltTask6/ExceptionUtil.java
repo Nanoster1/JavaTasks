@@ -29,7 +29,7 @@ public class ExceptionUtil
     private static void UpdateStackTrace(Throwable e, StackTraceElement[] stackTrace)
     {
         if (e == null || stackTrace == null || stackTrace.length == 0) return;
-        var updatedStackTrace = new ArrayList<StackTraceElement>(List.of(e.getStackTrace()));
+        var updatedStackTrace = new ArrayList<>(List.of(e.getStackTrace()));
         updatedStackTrace.addAll(List.of(stackTrace));
         e.setStackTrace(updatedStackTrace.toArray(new StackTraceElement[0]));
     }
